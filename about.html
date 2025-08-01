@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Sri Sathya Sai Higher Secondary School</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Montserrat and Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- GSAP for 3D slider animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        /* Global Reset & Box Sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; /* Default font for general text */
+        }
+
+        /* Root CSS Variables (updated for purple color scheme) */
+        :root {
+            --primary: #8A2BE2; /* Primary Purple (Blue Violet) */
+            --secondary: #ff6b00; /* Vibrant Orange (kept) */
+            --accent: #ffd700; /* Gold/Yellow (kept) */
+            --light: #f8f9fa; /* Off-white (kept) */
+            --dark: #1a1a2e; /* Dark Blue/Purple (kept) */
+            --text: #333; /* Dark Grey for body text (kept) */
+            --success: #28a745; /* Green (kept) */
+            --info: #17a2b8; /* Cyan (kept) */
+            --gradient-purple: linear-gradient(135deg, #8A2BE2, #6A0DAD); /* Purple gradient */
+            --gradient-orange: linear-gradient(135deg, #ff6b00, #e55a00); /* Orange gradient (kept) */
+            --purple-light: #8a2be2; /* For gallery consistency */
+            --purple-dark: #4b0082; /* For gallery consistency */
+        }
+
+        /* Body styles */
+        body {
+            background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%);
+            color: var(--text);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Decorative background elements */
+        .bg-element {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.08;
+        }
+
+        .bg-1 {
+            top: 10%;
+            left: 5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--secondary), transparent);
+            border-radius: 50%;
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        .bg-2 {
+            bottom: 15%;
+            right: 8%;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, var(--accent), transparent);
+            transform: rotate(45deg);
+            animation: rotate 25s infinite linear;
+        }
+
+        .bg-3 {
+            top: 40%;
+            left: 20%;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary), transparent);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 12s infinite ease-in-out;
+        }
+
+        /* Keyframes */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.08; }
+            50% { transform: scale(1.1); opacity: 0.15; }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            33% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            66% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: var(--gradient-purple); /* Apply purple gradient to logo text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo h1:hover {
+            transform: scale(1.02);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo span {
+            background: var(--gradient-orange); /* Orange gradient for 'Sai' */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(255, 107, 0, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary); /* Hover color is primary purple */
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Login Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 220px;
+            padding: 1rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown-content.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--dark);
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(138, 43, 226, 0.08); /* Purple hover background */
+            color: var(--primary); /* Primary purple color */
+            transform: translateX(5px);
+        }
+
+        .dropdown-content a i {
+            margin-right: 10px;
+            color: var(--primary); /* Primary purple color */
+        }
+
+        .nav-btn {
+            background: var(--gradient-purple); /* Purple gradient for button */
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4); /* Purple shadow */
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: var(--gradient-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--primary); /* Primary purple color */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: var(--secondary);
+        }
+
+        /* About Page Specific Styles */
+        .about-hero {
+            background: url('images/school.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            margin-top: 80px; /* To account for fixed navbar */
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .about-hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-hero-content p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .about-section-main {
+            padding: 6rem 5%;
+            background: #f9f9f9;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: var(--gradient-purple); /* Purple gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tabs {
+            display: flex;
+            width: 100%;
+            border-bottom: 2px solid #e1e1e1;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center; /* Center tabs */
+        }
+        
+        .tab {
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #555;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+        }
+        
+        .tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .tab:hover {
+            color: var(--primary);
+        }
+        
+        .content-area {
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .main-content {
+            flex: 2;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .main-content p {
+            margin-bottom: 25px;
+            font-size: 16px;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: var(--secondary);
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        .side-boxes {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .side-box {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .side-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            color: var(--primary);
+        }
+        
+        .side-box img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            object-fit: contain;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 5%;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: pulse 10s infinite ease-in-out;
+        }
+
+        .testimonials::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: rotate 15s infinite linear reverse;
+        }
+
+        .testimonial-carousel {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            display: none; /* Hidden by default */
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--accent);
+            transform: scale(1.2);
+        }
+
+        /* Gallery Section (Merged from gallery.html) */
+        .gallery-section {
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(to bottom, #f8f9ff, #f0e6ff);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-category {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .category-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .category-title h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--purple-dark);
+            display: inline-block;
+            padding: 0 1.5rem;
+            position: relative;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(75, 0, 130, 0.1));
+            border-radius: 10px;
+        }
+
+        .category-title h3::before,
+        .category-title h3::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple-light), var(--secondary));
+        }
+
+        .category-title h3::before {
+            right: 100%;
+        }
+
+        .category-title h3::after {
+            left: 100%;
+        }
+
+        .view-more {
+            display: block;
+            margin: 3rem auto 0;
+            text-align: center;
+            width: 200px;
+            background: var(--gradient-purple);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .view-more::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-orange);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .view-more:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+        }
+
+        .view-more:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Gallery Decorations */
+        .gallery-deco {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .deco-1 {
+            top: 10%;
+            left: 10%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--purple-light), transparent);
+            border-radius: 50%;
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        .deco-2 {
+            bottom: 20%;
+            right: 12%;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, var(--accent), transparent);
+            transform: rotate(45deg);
+            animation: rotate 20s infinite linear;
+        }
+
+        .deco-3 {
+            top: 40%;
+            right: 25%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--purple-dark), transparent);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 15s infinite ease-in-out;
+        }
+
+        .floating-icon {
+            position: absolute;
+            z-index: 1;
+            font-size: 2.5rem;
+            color: rgba(138, 43, 226, 0.2);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .icon-1 {
+            top: 15%;
+            left: 8%;
+            animation-delay: 0s;
+        }
+
+        .icon-2 {
+            top: 25%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .icon-3 {
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+
+        /* 3D Slider Styles */
+        .slider-3d-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            perspective: 1200px;
+            margin: 0 auto 3rem;
+            padding: 1rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.15);
+            overflow: hidden;
+        }
+
+        .slider-3d-gradient-bg {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, rgba(106, 13, 173, 0.1) 50%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            filter: blur(50px);
+        }
+
+        .slider-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+
+        .slider-3d-slide {
+            position: absolute;
+            width: 350px;
+            height: 450px;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%) translateZ(-500px) rotateY(0deg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            transition: filter 0.3s ease;
+            z-index: 1;
+        }
+
+        .slider-3d-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slider-3d-slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 20px 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            text-align: left;
+            transform: translateY(100px);
+            transition: transform 0.5s ease;
+            z-index: 2;
+        }
+
+        .slider-3d-slide-content h4 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .slider-3d-slide-content p {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+            color: #e0e0e0;
+        }
+
+        .slider-3d-slide-content .date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .slider-3d-navigation {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slider-3d-nav-btn {
+            background: var(--gradient-purple);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slider-3d-nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: var(--gradient-orange);
+        }
+
+        .slider-3d-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slider-3d-pagination-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(138, 43, 226, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-3d-pagination-dot.active {
+            background: var(--purple-light);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, white, #e6e6e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo span {
+            background: var(--gradient-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-links li {
+            margin: 0;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary); /* Primary purple color */
+            transform: translateY(-7px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4); /* Purple shadow */
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .about-hero-content h1 {
+                font-size: 3.5rem;
+            }
+            .slider-3d-container {
+                height: 400px;
+            }
+            .slider-3d-slide {
+                width: 280px;
+                height: 360px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-hero {
+                height: 50vh;
+            }
+            .about-hero-content h1 {
+                font-size: 3rem;
+            }
+            .about-hero-content p {
+                font-size: 1.1rem;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                padding: 1.5rem 0;
+                gap: 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 0.8rem 0;
+                text-align: center;
+                width: 100%;
+            }
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                width: 100%;
+                padding: 0;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+            }
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            .content-area {
+                flex-direction: column;
+            }
+            .side-boxes {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .side-box {
+                flex: 1 1 45%; /* Two boxes per row on smaller screens */
+                max-width: 200px;
+            }
+            .slider-3d-container {
+                height: 350px;
+            }
+            .slider-3d-slide {
+                width: 240px;
+                height: 320px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-hero {
+                height: 40vh;
+            }
+            .about-hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .about-hero-content p {
+                font-size: 1rem;
+            }
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            .tab {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid #eee;
+            }
+            .tab.active:after {
+                width: 50%;
+                left: 25%;
+            }
+            .category-title h3 {
+                font-size: 1.8rem;
+            }
+            .category-title h3::before,
+            .category-title h3::after {
+                width: 40px;
+            }
+            .slider-3d-container {
+                height: 300px;
+            }
+            .slider-3d-slide {
+                width: 220px;
+                height: 280px;
+            }
+            .slider-3d-nav-btn {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero-content h1 {
+                font-size: 2rem;
+            }
+            .about-section-main {
+                padding: 4rem 5%;
+            }
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            .section-title p {
+                font-size: 1rem;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .main-content p {
+                font-size: 0.9rem;
+            }
+            .side-box {
+                flex: 1 1 100%; /* One box per row on very small screens */
+            }
+            .category-title h3 {
+                font-size: 1.5rem;
+            }
+            .category-title h3::before,
+            .category-title h3::after {
+                display: none;
+            }
+        }
+
+        /* Added/Modified CSS for content display */
+        .main-content .content {
+            display: none; /* Hide all content sections by default */
+        }
+
+        .main-content .content.active {
+            display: block; /* Show only the active content section */
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative Background Elements -->
+    <div class="bg-element bg-1"></div>
+    <div class="bg-element bg-2"></div>
+    <div class="bg-element bg-3"></div>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Technetworks Logo" style="height: 100px;">
+           <a href="index.html" style="text-decoration: none;"> <h1>Sri Sathya <span>Sai Higher Secondary School</span></h1></a>
+
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="school.html">School</a></li>
+            <li><a href="hostel.html">Hostel</a></li>
+            <li class="dropdown">
+                <a href="#" class="login-dropdown-toggle">Login <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content" id="loginDropdown">
+                    <a href="#" class="login-option" data-type="parent"><i class="fas fa-user-friends"></i> Parent Login</a>
+                    <a href="#" class="login-option" data-type="student"><i class="fas fa-user-graduate"></i> Student Login</a>
+                </div>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        
+        <a href="admission.html" class="nav-btn"><i class="fas fa-edit"></i> Apply Now</a>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <h1>About Our School</h1>
+            <p>Nurturing minds, building character, shaping futures.</p>
+        </div>
+    </section>
+
+    <!-- About Section Content -->
+    <section class="about-section-main" id="about-content">
+        <div class="section-title">
+            <h2>Our Journey of Excellence</h2>
+            <p>Discover our rich history, guiding principles, and the dedicated team behind our success.</p>
+        </div>
+        
+        <div class="about-container">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="who-we-are">Who We Are</button>
+                <button class="tab" data-tab="mission">Our Mission</button>
+                <button class="tab" data-tab="vision">Our Vision</button>
+                <button class="tab" data-tab="values">Our Values</button>
+                <button class="tab" data-tab="management">Management</button>
+            </div>
+
+            <div class="content-area">
+                <!-- Left Side Content -->
+                <div class="main-content">
+                    <!-- Who We Are Content -->
+                    <div class="content active" id="who-we-are-content">
+                        <h3>A Legacy of Holistic Education</h3>
+                        <p>
+                            Established in 1985, Sri Sathya Sai Higher Secondary School has been a beacon of value-based education, committed to fostering intellectual, emotional, and spiritual growth in every student. We believe in creating global citizens who are not only academically proficient but also embody strong moral principles and a deep sense of social responsibility. Our unique blend of world-class curricula and contemporary teaching methodologies prepares students to excel in a rapidly evolving world.
+                        </p>
+                        <p>
+                            Over the decades, we have proudly shaped countless successful individuals who have gone on to become leading doctors, engineers, civil servants, entrepreneurs, and artists, contributing positively to society. Our alumni network spans across the globe, a testament to the strong foundation laid here.
+                        </p>
+                        <a href="#" class="read-more">Explore Our History <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <!-- Mission Content -->
+                    <div class="content" id="mission-content">
+                        <h3>Our Guiding Purpose</h3>
+                        <p>
+                            Our mission is to provide a transformative educational experience that extends beyond traditional academics. We are dedicated to developing character, fostering creativity, and enhancing critical thinking skills in a nurturing and inspiring environment. Through innovative teaching practices, state-of-the-art facilities, and a deeply embedded values-based approach, we aim to unlock each student's unique potential.
+                        </p>
+                        <p>
+                            We are committed to cultivating global citizenship, promoting environmental consciousness, and instilling a strong sense of social responsibility, all while upholding the highest standards of academic excellence and preparing students for the challenges and opportunities of the 21st century.
+                        </p>
+                        <a href="#" class="read-more">Discover Our Programs <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Vision Content -->
+                    <div class="content" id="vision-content">
+                        <h3>Our Future Aspiration</h3>
+                        <p>
+                            Our vision is to be a globally recognized institution of excellence, celebrated for its innovative educational practices, holistic development model, and its contribution to creating compassionate, responsible, and skilled leaders of tomorrow. We envision a learning community where curiosity thrives, creativity is celebrated, and every individual is empowered to make a meaningful difference in the world.
+                        </p>
+                        <p>
+                            We strive to continuously evolve our educational framework to meet future demands, ensuring our students are equipped with the adaptability, resilience, and ethical grounding needed to navigate complex global challenges and lead with integrity.
+                        </p>
+                        <a href="#" class="read-more">Learn About Our Future <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Values Content -->
+                    <div class="content" id="values-content">
+                        <h3>The Pillars of Our Foundation</h3>
+                        <p>
+                            At Sri Sathya Sai Higher Secondary School, our values are the bedrock of our educational philosophy. We instill:
+                            <ul>
+                                <li><strong>Integrity:</strong> Upholding honesty, truthfulness, and strong moral principles in all actions.</li>
+                                <li><strong>Compassion:</strong> Fostering empathy, kindness, and understanding towards others.</li>
+                                <li><strong>Excellence:</strong> Striving for the highest standards in academics, character, and all endeavors.</li>
+                                <li><strong>Respect:</strong> Valuing diversity, fostering tolerance, and showing regard for all individuals and the environment.</li>
+                                <li><strong>Service:</strong> Encouraging selfless contribution to the community and society at large.</li>
+                            </ul>
+                        </p>
+                        <p>
+                            These values are woven into every aspect of school life, guiding our interactions, teaching methodologies, and community initiatives, ensuring our students grow into well-rounded and responsible individuals.
+                        </p>
+                        <a href="#" class="read-more">Our Philosophy <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <!-- Management Content -->
+                    <div class="content" id="management-content">
+                        <h3>Visionary Leadership</h3>
+                        <p>
+                            Sri Sathya Sai Higher Secondary School is steered by a visionary management team and a dedicated governing board, comprising seasoned educators, industry stalwarts, and respected community leaders. Their collective expertise and unwavering commitment ensure that the school remains at the forefront of educational innovation while upholding its core values.
+                        </p>
+                        <p>
+                            Our leadership team is passionately involved in curriculum development, faculty mentorship, and fostering a vibrant learning ecosystem. They are dedicated to creating an environment where every student can thrive academically, socially, and personally, preparing them to be impactful leaders in their chosen fields.
+                        </p>
+                        <a href="#" class="read-more">Meet Our Leadership <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Right Side Boxes with Icons -->
+                <div class="side-boxes">
+                    <div class="side-box" onclick="location.href='school.html';">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3976/3976626.png" alt="School">
+                        <span>Our School</span>
+                    </div>
+                    <div class="side-box" onclick="location.href='admission.html';">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3976/3976629.png" alt="Admissions">
+                        <span>Admissions Process</span>
+                    </div>
+                    <div class="side-box" onclick="location.href='contact.html';">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3976/3976606.png" alt="Contact Us">
+                        <span>Contact Us</span>
+                    </div>
+                    <div class="side-box" onclick="location.href='hostel.html';">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3976/3976630.png" alt="Hostel Life">
+                        <span>Hostel Life</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-title">
+            <h2>What Our Community Says</h2>
+            <p>Hear from our students, parents, and alumni about their experiences.</p>
+        </div>
+        <div class="testimonial-carousel" id="testimonial-carousel">
+            <div class="testimonial-slide active">
+                <p class="testimonial-text">"Sri Sathya Sai Higher Secondary School provided me with not just an education, but a foundation for life. The values instilled here have guided me throughout my career."</p>
+                <p class="testimonial-author">- Dr. Ananya Sharma</p>
+                <p class="testimonial-role">Alumna, Class of 2005</p>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-text">"As a parent, I couldn't be happier with the holistic development my child receives. The teachers are incredibly supportive, and the environment is truly nurturing."</p>
+                <p class="testimonial-author">- Mr. Rajesh Kumar</p>
+                <p class="testimonial-role">Parent of a 7th Grader</p>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-text">"Learning here is an exciting journey. The practical approach to subjects and the encouragement to participate in extracurricular activities make school truly enjoyable."</p>
+                <p class="testimonial-author">- Priya Singh</p>
+                <p class="testimonial-role">Student, 9th Grade</p>
+            </div>
+        </div>
+        <div class="carousel-dots" id="testimonial-dots"></div>
+    </section>
+
+    <!-- Gallery Section (Merged from gallery.html) -->
+    <section class="gallery-section" id="gallery">
+        <div class="section-title">
+            <h2>Our Gallery</h2>
+            <p>Explore moments from our vibrant campus life at Sri Sathya Sai Higher Secondary School</p>
+        </div>
+        
+        <!-- INFRASTRUCTURE GALLERY with 3D Slider -->
+        <div class="gallery-category">
+            <div class="category-title">
+                <h3>INFRASTRUCTURE GALLERY</h3>
+            </div>
+            
+            <!-- 3D Slider Container -->
+            <div class="slider-3d-container" id="infra-slider">
+                <div class="slider-3d-gradient-bg"></div>
+                <div class="slider-3d" id="slider3d-infra">
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=" alt="School Building">
+                        <div class="slider-3d-slide-content">
+                            <h4>Main Building</h4>
+                            <p>The beautiful architecture of our main school building</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>15 JUN 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Library">
+                        <div class="slider-3d-slide-content">
+                            <h4>School Library</h4>
+                            <p>Students exploring knowledge in our well-stocked library</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>22 JUL 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Laboratory">
+                        <div class="slider-3d-slide-content">
+                            <h4>Science Laboratory</h4>
+                            <p>Advanced science lab facilities for practical learning</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>5 AUG 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Campus Grounds">
+                        <div class="slider-3d-slide-content">
+                            <h4>Campus Grounds</h4>
+                            <p>Beautiful view of our school campus with lush green surroundings</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>12 SEP 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-3d-navigation">
+                    <button class="slider-3d-nav-btn" id="prev-btn-infra">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="slider-3d-nav-btn" id="next-btn-infra">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="slider-3d-pagination" id="slider3d-pagination-infra"></div>
+            </div>
+        </div>
+        
+        <!-- GRAMA SEVA GALLERY with 3D Slider -->
+        <div class="gallery-category">
+            <div class="category-title">
+                <h3>GRAMA SEVA GALLERY</h3>
+            </div>
+            
+            <!-- 3D Slider Container -->
+            <div class="slider-3d-container" id="grama-slider">
+                <div class="slider-3d-gradient-bg"></div>
+                <div class="slider-3d" id="slider3d-grama">
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Community Service">
+                        <div class="slider-3d-slide-content">
+                            <h4>Village Cleanup</h4>
+                            <p>Students participating in village cleanup initiative</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>15 JUN 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Food Distribution">
+                        <div class="slider-3d-slide-content">
+                            <h4>Food Distribution</h4>
+                            <p>Distributing food to underprivileged families in nearby villages</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>22 JUL 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Medical Camp">
+                        <div class="slider-3d-slide-content">
+                            <h4>Medical Camp</h4>
+                            <p>Organizing free medical checkup camps in rural areas</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>5 AUG 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Teaching Children">
+                        <div class="slider-3d-slide-content">
+                            <h4>Teaching Children</h4>
+                            <p>Students teaching village children during Grama Seva</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>12 SEP 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-3d-navigation">
+                    <button class="slider-3d-nav-btn" id="prev-btn-grama">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="slider-3d-nav-btn" id="next-btn-grama">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="slider-3d-pagination" id="slider3d-pagination-grama"></div>
+            </div>
+        </div>
+        
+        <!-- TALENT SEARCH PROGRAMME GALLERY with 3D Slider -->
+        <div class="gallery-category">
+            <div class="category-title">
+                <h3>TALENT SEARCH PROGRAMME GALLERY</h3>
+            </div>
+            
+            <!-- 3D Slider Container -->
+            <div class="slider-3d-container" id="talent-slider">
+                <div class="slider-3d-gradient-bg"></div>
+                <div class="slider-3d" id="slider3d-talent">
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Art Exhibition">
+                        <div class="slider-3d-slide-content">
+                            <h4>Art Competition</h4>
+                            <p>Students showcasing their artistic talents during the programme</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>20 SEP 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Music Performance">
+                        <div class="slider-3d-slide-content">
+                            <h4>Music Performance</h4>
+                            <p>Students performing musical pieces during talent search</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>25 SEP 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dance Performance">
+                        <div class="slider-3d-slide-content">
+                            <h4>Dance Competition</h4>
+                            <p>Students performing traditional dances at the talent show</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>12 OCT 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Science Project">
+                        <div class="slider-3d-slide-content">
+                            <h4>Science Innovation</h4>
+                            <p>Students presenting innovative projects during talent search</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>15 OCT 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-3d-navigation">
+                    <button class="slider-3d-nav-btn" id="prev-btn-talent">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="slider-3d-nav-btn" id="next-btn-talent">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="slider-3d-pagination" id="slider3d-pagination-talent"></div>
+            </div>
+        </div>
+        
+        <!-- ANNUAL SPORTSMEET GALLERY with 3D Slider -->
+        <div class="gallery-category">
+            <div class="category-title">
+                <h3>ANNUAL SPORTSMEET GALLERY</h3>
+            </div>
+            
+            <!-- 3D Slider Container -->
+            <div class="slider-3d-container" id="sports-slider">
+                <div class="slider-3d-gradient-bg"></div>
+                <div class="slider-3d" id="slider3d-sports">
+                    <div class="slider-3d-slide">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.Y26kFxJCGSSfrCa0uWpicQHaEK?pid=Api&P=0&h=220" alt="Sports Day">
+                        <div class="slider-3d-slide-content">
+                            <h4>Opening Ceremony</h4>
+                            <p>March past during the opening of the annual sports meet</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>28 SEP 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.3PV92mLd3Z7hH3tvHT4fNgHaEJ?pid=Api&P=0&h=220" alt="Basketball">
+                        <div class="slider-3d-slide-content">
+                            <h4>Basketball Finals</h4>
+                            <p>Our championship basketball team in action during finals</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>5 OCT 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.LnW9DivGwbH8NDy2NUn7pgHaHD?pid=Api&P=0&h=220" alt="Athletics">
+                        <div class="slider-3d-slide-content">
+                            <h4>Athletics Competition</h4>
+                            <p>Students competing in track and field events</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>3 OCT 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-3d-slide">
+                        <img src="https://www.jnanadeepa.com/sites/default/files/gallery/24th-annual-day-prize-distribution/6283.jpg" alt="Prize Distribution">
+                        <div class="slider-3d-slide-content">
+                            <h4>Prize Distribution</h4>
+                            <p>Winners receiving medals at the closing ceremony</p>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>10 OCT 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-3d-navigation">
+                    <button class="slider-3d-nav-btn" id="prev-btn-sports">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="slider-3d-nav-btn" id="next-btn-sports">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="slider-3d-pagination" id="slider3d-pagination-sports"></div>
+            </div>
+        </div>
+        
+        <a href="#" class="view-more">View Full Gallery <i class="fas fa-arrow-right"></i></a>
+        
+        <!-- Gallery Decorations -->
+        <div class="gallery-deco deco-1"></div>
+        <div class="gallery-deco deco-2"></div>
+        <div class="gallery-deco deco-3"></div>
+        
+        <div class="floating-icon icon-1">
+            <i class="fas fa-camera"></i>
+        </div>
+        <div class="floating-icon icon-2">
+            <i class="fas fa-image"></i>
+        </div>
+        <div class="floating-icon icon-3">
+            <i class="fas fa-images"></i>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Sri Sathya <span>Sai</span></div>
+            <p>Higher Secondary School - Nurturing Future Leaders with Values</p>
+            
+            <ul class="footer-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="school.html">School</a></li>
+                <li><a href="admission.html">Admissions</a></li>
+                <li><a href="hostel.html">Hostel</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Sri Sathya Sai Higher Secondary School. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links (only for internal anchors)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+        });
+
+        // About section tabs functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    contents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+
+            // Testimonial Carousel
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            const testimonialDotsContainer = document.getElementById('testimonial-dots');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                testimonialSlides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    if (i === index) {
+                        slide.classList.add('active');
+                    }
+                });
+                updateDots(index);
+            }
+
+            function updateDots(index) {
+                testimonialDotsContainer.innerHTML = ''; // Clear existing dots
+                testimonialSlides.forEach((_, i) => {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === index) {
+                        dot.classList.add('active');
+                    }
+                    dot.addEventListener('click', () => showSlide(i));
+                    testimonialDotsContainer.appendChild(dot);
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % testimonialSlides.length;
+                showSlide(currentSlide);
+            }
+
+            // Initialize testimonial carousel
+            if (testimonialSlides.length > 0) {
+                showSlide(currentSlide);
+                setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+
+            // Function to initialize a 3D slider
+            function init3DSlider(sliderId, prevBtnId, nextBtnId, paginationId) {
+                const slider = document.getElementById(sliderId);
+                const slides = slider.querySelectorAll('.slider-3d-slide');
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                const pagination = document.getElementById(paginationId);
+                
+                let currentIndex = 0;
+                const totalSlides = slides.length;
+                const angleStep = 360 / totalSlides;
+                
+                // Create pagination dots
+                pagination.innerHTML = '';
+                slides.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.classList.add('slider-3d-pagination-dot');
+                    if (index === 0) dot.classList.add('active');
+                    dot.dataset.index = index;
+                    dot.addEventListener('click', () => goToSlide(index));
+                    pagination.appendChild(dot);
+                });
+                
+                const dots = pagination.querySelectorAll('.slider-3d-pagination-dot');
+                
+                // Initialize slider
+                function updateSlider() {
+                    slides.forEach((slide, index) => {
+                        const angle = angleStep * (index - currentIndex);
+                        const distance = 500;
+                        const z = -Math.cos(angle * Math.PI / 180) * distance;
+                        const x = Math.sin(angle * Math.PI / 180) * distance;
+                        
+                        gsap.to(slide, {
+                            duration: 1.2,
+                            x: x,
+                            z: z,
+                            rotationY: -angle,
+                            ease: "power3.out",
+                            overwrite: "auto"
+                        });
+                        
+                        if (index === currentIndex) {
+                            slide.classList.add('active');
+                        } else {
+                            slide.classList.remove('active');
+                        }
+                    });
+                    
+                    dots.forEach((dot, index) => {
+                        if (index === currentIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                }
+                
+                function goToSlide(index) {
+                    currentIndex = index;
+                    if (currentIndex >= totalSlides) currentIndex = 0;
+                    if (currentIndex < 0) currentIndex = totalSlides - 1;
+                    updateSlider();
+                }
+                
+                function nextSlide() {
+                    currentIndex = (currentIndex + 1) % totalSlides;
+                    updateSlider();
+                }
+                
+                function prevSlide() {
+                    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                    updateSlider();
+                }
+                
+                nextBtn.addEventListener('click', nextSlide);
+                prevBtn.addEventListener('click', prevSlide);
+                
+                let autoRotate = setInterval(nextSlide, 5000);
+                
+                slider.addEventListener('mouseenter', () => {
+                    clearInterval(autoRotate);
+                });
+                
+                slider.addEventListener('mouseleave', () => {
+                    autoRotate = setInterval(nextSlide, 5000);
+                });
+                
+                updateSlider();
+            }
+
+            // Initialize all 3D sliders
+            init3DSlider('slider3d-infra', 'prev-btn-infra', 'next-btn-infra', 'slider3d-pagination-infra');
+            init3DSlider('slider3d-grama', 'prev-btn-grama', 'next-btn-grama', 'slider3d-pagination-grama');
+            init3DSlider('slider3d-talent', 'prev-btn-talent', 'next-btn-talent', 'slider3d-pagination-talent');
+            init3DSlider('slider3d-sports', 'prev-btn-sports', 'next-btn-sports', 'slider3d-pagination-sports');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School & Mission - Sri Sathya Sai Higher Secondary School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #6a0dad;
+            --secondary: #ff6b00;
+            --accent: #ffd700;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --text: #333;
+            --success: #28a745;
+            --info: #17a2b8;
+            --purple-light: #8a2be2;
+            --purple-dark: #4b0082;
+            --gradient-purple: linear-gradient(135deg, #8A2BE2, #6A0DAD);
+            --gradient-orange: linear-gradient(135deg, #ff6b00, #e55a00);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9f3ff 0%, #f0e6ff 100%);
+            color: var(--text);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .bg-element {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.08;
+        }
+
+        .bg-1 {
+            top: 10%;
+            left: 5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--secondary), transparent);
+            border-radius: 50%;
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        .bg-2 {
+            bottom: 15%;
+            right: 8%;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, var(--accent), transparent);
+            transform: rotate(45deg);
+            animation: rotate 25s infinite linear;
+        }
+
+        .bg-3 {
+            top: 40%;
+            left: 20%;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--purple-dark), transparent);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 12s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.08; }
+            50% { transform: scale(1.1); opacity: 0.15; }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            33% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            66% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo span {
+            background: var(--gradient-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(255, 107, 0, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 220px;
+            padding: 1rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--dark);
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(106, 13, 173, 0.08);
+            color: var(--purple-light);
+            transform: translateX(5px);
+        }
+
+        .dropdown-content a i {
+            margin-right: 10px;
+            color: var(--purple-light);
+        }
+
+        .nav-btn {
+            background: var(--gradient-purple);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: var(--gradient-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--purple-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section - Same as school.html */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--secondary), #e55a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            line-height: 1.7;
+            max-width: 90%;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            color: white;
+            box-shadow: 0 5px 20px rgba(106, 13, 173, 0.4);
+        }
+
+        .primary-btn:hover {
+            background: linear-gradient(135deg, #7d2dd8, #5a1d9e);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(106, 13, 173, 0.5);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: var(--purple-light);
+            border: 2px solid var(--purple-light);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(106, 13, 173, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(106, 13, 173, 0.2);
+        }
+
+        .slider-container {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 600px;
+            height: 500px;
+            perspective: 1500px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s infinite linear;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            transition: transform 0.5s ease;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide:nth-child(1) {
+            transform: rotateY(0deg) translateZ(400px);
+        }
+
+        .slide:nth-child(2) {
+            transform: rotateY(90deg) translateZ(400px);
+        }
+
+        .slide:nth-child(3) {
+            transform: rotateY(180deg) translateZ(400px);
+        }
+
+        .slide:nth-child(4) {
+            transform: rotateY(270deg) translateZ(400px);
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .floating-elem {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .elem-1 {
+            top: 20%;
+            left: 8%;
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .elem-2 {
+            bottom: 25%;
+            right: 12%;
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 10s ease-in-out infinite 1s;
+        }
+
+        .elem-3 {
+            top: 40%;
+            right: 25%;
+            width: 40px;
+            height: 40px;
+            background: var(--purple-light);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 12s ease-in-out infinite 2s;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background-color: #e9ecef;
+            padding: 1rem 5%;
+            font-size: 0.95rem;
+            color: #6c757d;
+            border-bottom: 1px solid #dee2e6;
+            position: relative;
+            z-index: 10;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            margin: 0 5px;
+        }
+
+        /* Main Content Section */
+        .main-content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-content-left {
+            flex: 3;
+            min-width: 300px;
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary);
+        }
+
+        .main-content-left h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        .main-content-left h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .main-content-left p {
+            margin-bottom: 1.8rem;
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .main-content-left ul {
+            list-style: none;
+            margin-left: 0;
+            margin-bottom: 1.8rem;
+            padding-left: 0;
+        }
+
+        .main-content-left ul li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: #555;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .main-content-left ul li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--success);
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+
+        .main-content-left a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .main-content-left a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .read-more-btn i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more-btn:hover {
+            color: var(--secondary);
+        }
+        
+        .read-more-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Right Side Navigation / Quick Links */
+        .side-navigation {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            height: fit-content;
+        }
+
+        .side-navigation h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        .side-navigation ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .side-navigation ul li {
+            margin-bottom: 10px;
+        }
+
+        .side-navigation ul li a {
+            display: block;
+            padding: 12px 20px;
+            background-color: #f0f5ff;
+            border-radius: 8px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+        }
+
+        .side-navigation ul li a:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.2);
+        }
+        
+        .side-navigation ul li a.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .side-navigation ul li a i {
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+
+        .side-navigation ul li a:hover i,
+        .side-navigation ul li a.active i {
+            color: var(--accent);
+        }
+
+        /* Additional Info Boxes */
+        .additional-info-boxes {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .info-box h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .info-box p, .info-box ul {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box ul li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .info-box ul li i {
+            color: var(--primary);
+            margin-top: 3px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, white, #e6e6e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo span {
+            background: var(--gradient-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-links li {
+            margin: 0;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .social-icons a:hover {
+            background: var(--purple-light);
+            transform: translateY(-7px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .slider-container {
+                width: 45%;
+            }
+            .main-content-wrapper {
+                flex-direction: column;
+                margin: 20px auto;
+            }
+            .main-content-left, .side-navigation {
+                min-width: unset;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 5rem;
+                height: auto;
+            }
+
+            .hero-content {
+                margin-bottom: 3rem;
+                max-width: 100%;
+            }
+
+            .hero p {
+                max-width: 100%;
+            }
+
+            .slider-container {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 100%;
+                max-width: 100%;
+                margin-top: 2rem;
+                height: 400px;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                padding: 1.5rem 0;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.8rem 0;
+                text-align: center;
+                width: 100%;
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                width: 100%;
+                padding: 0;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .main-content-left h2 {
+                font-size: 1.8rem;
+            }
+            .main-content-left h3 {
+                font-size: 1.5rem;
+            }
+            .side-navigation h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .main-content-left {
+                padding: 30px;
+            }
+            .main-content-left h2 {
+                font-size: 1.6rem;
+            }
+            .main-content-left h3 {
+                font-size: 1.3rem;
+            }
+            .main-content-left p, .main-content-left ul li {
+                font-size: 1rem;
+            }
+            .side-navigation {
+                padding: 20px;
+            }
+            .side-navigation ul li a {
+                padding: 8px 12px;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero-btns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .main-content-left {
+                padding: 20px;
+            }
+            .main-content-left p, .main-content-left ul li {
+                font-size: 0.9rem;
+            }
+            .side-navigation ul li a {
+                font-size: 0.9rem;
+            }
+        }
+
+           /* Quick Links Sidebar */
+        .quick-links-sidebar {
+            position: fixed;
+            right: -250px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 250px;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            border-radius: 10px 0 0 10px;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .quick-links-sidebar.active {
+            right: 0;
+        }
+        
+        .quick-links-toggle {
+            position: absolute;
+            left: -40px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px 0 0 10px;
+            cursor: pointer;
+            box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .quick-links-toggle i {
+            transition: var(--transition);
+        }
+        
+        .quick-links-sidebar.active .quick-links-toggle i {
+            transform: rotate(180deg);
+        }
+        
+        .quick-links-content {
+            padding: 20px;
+        }
+        
+        .quick-links-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .quick-links-list {
+            list-style: none;
+        }
+        
+        .quick-links-list li {
+            margin-bottom: 10px;
+        }
+        
+        .quick-link {
+            display: block;
+            padding: 8px 12px;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-link::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+            transition: var(--transition);
+        }
+        
+        .quick-link:hover {
+            background: var(--light);
+            transform: translateX(-5px);
+            color: var(--accent);
+        }
+        
+        .quick-link:hover::before {
+            left: 100%;
+        }
+        
+        .quick-link i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+           /* Breadcrumb */
+        .breadcrumb {
+            background-color: #e9ecef;
+            padding: 1rem 5%;
+            font-size: 0.95rem;
+            color: #6c757d;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            margin: 0 5px;
+        }
+
+        /* Main Content Section */
+        .main-content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px; /* Increased gap */
+            max-width: 1200px;
+            margin: 40px auto; /* Adjusted margin */
+            padding: 0 20px;
+        }
+
+        .main-content-left {
+            flex: 3;
+            min-width: 300px;
+            background: white;
+            padding: 50px; /* Increased padding */
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary); /* Added elegant border */
+        }
+
+        .main-content-left h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem; /* Increased font size */
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 2rem; /* Increased margin */
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        .main-content-left h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem; /* Increased font size */
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 3rem; /* Increased margin */
+            margin-bottom: 1rem;
+        }
+
+        .main-content-left p {
+            margin-bottom: 1.8rem; /* Increased margin */
+            font-size: 1.1rem; /* Increased font size */
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .main-content-left .image-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .main-content-left .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .main-content-left .image-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .main-content-left ul {
+            list-style: none; /* Remove default list style */
+            margin-left: 0;
+            margin-bottom: 1.8rem; /* Increased margin */
+            padding-left: 0;
+        }
+
+        .main-content-left ul li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            font-size: 1.1rem; /* Increased font size */
+            color: #555;
+            position: relative;
+            padding-left: 30px; /* Space for custom bullet */
+        }
+
+        .main-content-left ul li::before {
+            content: "\f13a"; /* Font Awesome heart icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            top: 5px; /* Adjusted top for better alignment */
+        }
+
+        .main-content-left a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .main-content-left a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .read-more-btn i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more-btn:hover {
+            color: var(--secondary);
+        }
+        
+        .read-more-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        
+    </style>
+</head>
+<body>
+    <!-- Decorative Background Elements -->
+    <div class="bg-element bg-1"></div>
+    <div class="bg-element bg-2"></div>
+    <div class="bg-element bg-3"></div>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <div class="logo">
+             <img src="images/logo.png" alt="Technetworks Logo" style="height: 100px;">
+            <a href="school.html" style="text-decoration: none;">
+                <h1>Sri Sathya <span>Sai Higher Secondary School</span></h1>
+            </a>
+        </div>
+        
+        <!-- <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="school.html">School</a></li>
+            <li><a href="hostel.html">Hostel</a></li>
+            <li class="dropdown">
+                <a href="#" class="login-dropdown-toggle">Login <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content" id="loginDropdown">
+                    <a href="#" class="login-option" data-type="parent"><i class="fas fa-user-friends"></i> Parent Login</a>
+                    <a href="#" class="login-option" data-type="student"><i class="fas fa-user-graduate"></i> Student Login</a>
+                </div>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul> -->
+        
+        <a href="admission.html" class="nav-btn"><i class="fas fa-edit"></i> Apply Now</a>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Same as school.html -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SMT ESWARAMMA  <span>HIGH SCHOOL</span></h1>
+            <p>Discover our guiding principles for nurturing future leaders through value-based education and character development.</p>
+            <div class="hero-btns">
+                <a href="#mission" class="btn primary-btn"><i class="fas fa-bullseye"></i> View Our Mission</a>
+                <a href="school.html" class="btn secondary-btn"><i class="fas fa-school"></i> Back to School</a>
+            </div>
+        </div>
+
+        <!-- 3D Image Slider -->
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.iVcuIYlpGx-6nAtY56ZcvwHaE7?pid=Api&P=0&h=220" alt="School Building">
+                </div>
+                <div class="slide">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.dDOpIHTD84c-WSjN_4y_nQHaDt?pid=Api&P=0&h=220" alt="Students in Classroom">
+                </div>
+                <div class="slide">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.phRF9Z4LeENkq4cwoOYvvAHaFc?pid=Api&P=0&h=220" alt="School Laboratory">
+                </div>
+                <div class="slide">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.S7uzVFyUDM8sfoZDpPXzUAHaEd?pid=Api&P=0&h=220" alt="Sports Activities">
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="floating-elem elem-1"></div>
+        <div class="floating-elem elem-2"></div>
+        <div class="floating-elem elem-3"></div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        You are here: <span><a href="index.html">Home</a></span> <span>&gt;</span> <span><a href="school.html">School</a></span> <span>&gt;</span> <span>Smt. Eswaramma High School</span>
+    </div>
+
+    <!-- Main Content Section Wrapper -->
+    <div class="main-content-wrapper">
+        <!-- Left Side: Detailed Content -->
+        <div class="main-content-left">
+            <h2>The Legacy of Smt. Eswaramma</h2>
+            <p>
+                Smt. Eswaramma High School is a cherished institution named in honor of the revered mother of Bhagawan Sri Sathya Sai Baba. Established with a vision to provide value-based education, the school stands as a testament to her virtues of love, humility, and selfless service. It is here that the foundations of character and academic excellence are laid for the younger students, preparing them for a seamless transition to higher secondary education.
+            </p>
+            <p>
+                The school's curriculum is a harmonious blend of modern academic standards and timeless human values. Our goal is to nurture not just bright students, but compassionate and responsible citizens who will contribute positively to society.
+            </p>
+
+            <div class="image-container">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.uTbiN6vTzc_ht2fD0urvBQHaEK?pid=Api&P=0&h=220" alt="Students in front of Smt. Eswaramma High School">
+            </div>
+            
+            <h3>Our Educational Philosophy</h3>
+            <p>
+                At Smt. Eswaramma High School, we believe that true education is a process of holistic development. Our approach focuses on five key pillars:
+            </p>
+            <ul>
+                <li><i class="fas fa-heart"></i> Character Building: Instilling integrity, discipline, and respect.</li>
+                <li><i class="fas fa-book-open"></i> Academic Excellence: Providing a robust curriculum that fosters critical thinking.</li>
+                <li><i class="fas fa-handshake"></i> Social Responsibility: Encouraging community service and empathy.</li>
+                <li><i class="fas fa-medal"></i> Physical Fitness: Promoting a healthy lifestyle through sports and physical activities.</li>
+                <li><i class="fas fa-music"></i> Artistic Expression: Cultivating creativity and appreciation for the arts.</li>
+            </ul>
+
+            <h3>Life at Smt. Eswaramma</h3>
+            <p>
+                From interactive classroom sessions to vibrant cultural events, life at Smt. Eswaramma High School is a journey of discovery and joy. Students are encouraged to participate in a wide range of extracurricular activities, including music, dance, public speaking, and environmental projects. Our dedicated faculty members serve as mentors, guiding each student to unlock their full potential and find their unique path.
+            </p>
+
+            <a href="school.html" class="read-more-btn">Back to School Overview <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Right Side: Side Navigation and Additional Info -->
+        <!-- <div class="side-navigation">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="school.html"><i class="fas fa-school"></i> School Overview</a></li>
+                <li><a href="mission-statement.html" class="active"><i class="fas fa-bullseye"></i> School & Mission</a></li>
+                <li><a href="mandatory-public-disclosure.html"><i class="fas fa-file-alt"></i> Public Disclosure</a></li>
+                <li><a href="smt-eswaramma-high-school.html"><i class="fas fa-graduation-cap"></i> SMT Eswaramma High School</a></li>
+                <li><a href="unique-facets.html"><i class="fas fa-lightbulb"></i> Unique Facets</a></li>
+                <li><a href="facilities.html"><i class="fas fa-building"></i> Facilities</a></li>
+                <li><a href="curriculum.html"><i class="fas fa-book"></i> Curriculum</a></li>
+                <li><a href="performance-appraisal.html"><i class="fas fa-chart-bar"></i> Performance & Appraisal</a></li>
+                <li><a href="#top"><i class="fas fa-arrow-alt-circle-up"></i> Top</a></li>
+            </ul> -->
+             <!-- Quick Links Sidebar -->
+    <!-- Sliding Quick Links Sidebar -->
+<div class="quick-links-sidebar">
+    <div class="quick-links-toggle">
+        <i class="fas fa-chevron-left"></i>
+    </div>
+    <div class="quick-links-content">
+        <h3 class="quick-links-title">Quick Links</h3>
+        <ul class="quick-links-list">
+            <li><a href="school.html" class="quick-link"><i class="fas fa-school"></i> School Overview</a></li>
+            <li><a href="mission-statement.html" class="quick-link active"><i class="fas fa-bullseye"></i> School & Mission</a></li>
+            <li><a href="mandatory-public-disclosure.html" class="quick-link"><i class="fas fa-file-alt"></i> Public Disclosure</a></li>
+            <li><a href="smt-eswaramma-high-school.html" class="quick-link"><i class="fas fa-graduation-cap"></i> SMT Eswaramma High School</a></li>
+            <li><a href="unique-facets.html" class="quick-link"><i class="fas fa-lightbulb"></i> Unique Facets</a></li>
+            <li><a href="facilities.html" class="quick-link"><i class="fas fa-building"></i> Facilities</a></li>
+            <li><a href="curriculum.html" class="quick-link"><i class="fas fa-book"></i> Curriculum</a></li>
+            <li><a href="performance-appraisal.html" class="quick-link"><i class="fas fa-chart-bar"></i> Performance & Appraisal</a></li>
+            <li><a href="#top" class="quick-link"><i class="fas fa-arrow-alt-circle-up"></i> Top</a></li>
+        </ul>
+    </div>
+</div>
+
+
+            <div class="additional-info-boxes">
+                <div class="info-box">
+                    <h4>About Us</h4>
+                    <p>
+                        The Sri Sathya Sai Higher Secondary School was inspired and initiated by Bhagawan Sri Sathya Sai Baba Himself. He is its life and soul, motivation and goal.
+                    </p>
+                    <a href="about.html" class="read-more-btn">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="info-box">
+                    <h4>University</h4>
+                    <ul>
+                        <li><i class="fas fa-university"></i> Sri Sathya Sai Institute of Higher Learning</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>Portals</h4>
+                    <ul>
+                        <li><i class="fas fa-globe"></i> Sri Sathya Sai Central Trust</li>
+                        <li><i class="fas fa-hospital"></i> Super Speciality Hospital</li>
+                        <li><i class="fas fa-broadcast-tower"></i> Radio Sai</li>
+                        <li><i class="fas fa-book"></i> Bookstore</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> P.O. Prasanthi Nilayam, Dt. Anantapur, A.P. - 515134</li>
+                        <li><i class="fas fa-phone"></i> Phone: 08555 - 289289</li>
+                        <li><i class="fas fa-envelope"></i> Email: ssshss@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Sri Sathya <span>Sai</span></div>
+            <p>Higher Secondary School - Nurturing Future Leaders with Values</p>
+            
+            <ul class="footer-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="school.html">School</a></li>
+                <li><a href="admission.html">Admissions</a></li>
+                <li><a href="hostel.html">Hostel</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Sri Sathya Sai Higher Secondary School. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+        });
+
+        // Set active class for current page in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Smooth scrolling for side navigation links
+            document.querySelectorAll('.side-navigation ul li a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                    // Update active class for side nav
+                    document.querySelectorAll('.side-navigation ul li a').forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Set initial active class for side navigation based on URL hash (if any)
+            const initialHash = window.location.hash.substring(1);
+            if (initialHash) {
+                const initialNavLink = document.querySelector(`.side-navigation ul li a[href="#${initialHash}"]`);
+                if (initialNavLink) {
+                    initialNavLink.classList.add('active');
+                }
+            } else {
+                // Default to 'School Overview' or first link if no hash
+                const firstSideNavLink = document.querySelector('.side-navigation ul li a');
+                if (firstSideNavLink) {
+                    firstSideNavLink.classList.add('active');
+                }
+            }
+        });
+     const toggleBtn = document.querySelector('.quick-links-toggle');
+    const sidebar = document.querySelector('.quick-links-sidebar');
+
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
+
+
+    </script>
+</body>
+</html>

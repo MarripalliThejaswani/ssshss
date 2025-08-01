@@ -1,0 +1,1221 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Sathya Sai Higher Secondary School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #6a0dad;
+            --secondary: #ff6b00;
+            --accent: #ffd700;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --text: #333;
+            --success: #28a745;
+            --info: #17a2b8;
+            --purple-light: #8a2be2;
+            --purple-dark: #4b0082;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9f3ff 0%, #f0e6ff 100%);
+            color: var(--text);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Decorative background elements */
+        .bg-element {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.08;
+        }
+
+        .bg-1 {
+            top: 10%;
+            left: 5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--purple-light), transparent);
+            border-radius: 50%;
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        .bg-2 {
+            bottom: 15%;
+            right: 8%;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, var(--accent), transparent);
+            transform: rotate(45deg);
+            animation: rotate 25s infinite linear;
+        }
+
+        .bg-3 {
+            top: 40%;
+            left: 20%;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--purple-dark), transparent);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 12s infinite ease-in-out;
+        }
+
+        /* Keyframes */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.08; }
+            50% { transform: scale(1.1); opacity: 0.15; }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            33% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            66% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo span {
+            color: var(--secondary);
+            text-shadow: 0 2px 4px rgba(255, 107, 0, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Login Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 220px;
+            padding: 1rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--dark);
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(106, 13, 173, 0.08);
+            color: var(--purple-light);
+            transform: translateX(5px);
+        }
+
+        .dropdown-content a i {
+            margin-right: 10px;
+            color: var(--purple-light);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, var(--secondary), #e55a00);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--purple-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: var(--secondary);
+        }
+ /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--secondary), #e55a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            line-height: 1.7;
+            max-width: 90%;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1.1rem 2.2rem;
+            border-radius: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            color: white;
+            box-shadow: 0 5px 20px rgba(106, 13, 173, 0.4);
+        }
+
+        .primary-btn:hover {
+            background: linear-gradient(135deg, #7d2dd8, #5a1d9e);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(106, 13, 173, 0.5);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: var(--purple-light);
+            border: 2px solid var(--purple-light);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(106, 13, 173, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(106, 13, 173, 0.2);
+        }
+
+        /* 3D Slider */
+        .slider-container {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 600px;
+            height: 500px;
+            perspective: 1500px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s infinite linear;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            transition: transform 0.5s ease;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide:nth-child(1) {
+            transform: rotateY(0deg) translateZ(400px);
+        }
+
+        .slide:nth-child(2) {
+            transform: rotateY(90deg) translateZ(400px);
+        }
+
+        .slide:nth-child(3) {
+            transform: rotateY(180deg) translateZ(400px);
+        }
+
+        .slide:nth-child(4) {
+            transform: rotateY(270deg) translateZ(400px);
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .elem-1 {
+            top: 20%;
+            left: 8%;
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .elem-2 {
+            bottom: 25%;
+            right: 12%;
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 10s ease-in-out infinite 1s;
+        }
+
+        .elem-3 {
+            top: 40%;
+            right: 25%;
+            width: 40px;
+            height: 40px;
+            background: var(--purple-light);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 12s ease-in-out infinite 2s;
+        }
+         .about-section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 25%;
+            border-radius: 2px;
+        }
+        /* Quick Links Sidebar */
+        .quick-links-sidebar {
+            position: fixed;
+            right: -250px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 250px;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            border-radius: 10px 0 0 10px;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .quick-links-sidebar.active {
+            right: 0;
+        }
+        
+        .quick-links-toggle {
+            position: absolute;
+            left: -40px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px 0 0 10px;
+            cursor: pointer;
+            box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .quick-links-toggle i {
+            transition: var(--transition);
+        }
+        
+        .quick-links-sidebar.active .quick-links-toggle i {
+            transform: rotate(180deg);
+        }
+        
+        .quick-links-content {
+            padding: 20px;
+        }
+        
+        .quick-links-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .quick-links-list {
+            list-style: none;
+        }
+        
+        .quick-links-list li {
+            margin-bottom: 10px;
+        }
+        
+        .quick-link {
+            display: block;
+            padding: 8px 12px;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-link::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+            transition: var(--transition);
+        }
+        
+        .quick-link:hover {
+            background: var(--light);
+            transform: translateX(-5px);
+            color: var(--accent);
+        }
+        
+        .quick-link:hover::before {
+            left: 100%;
+        }
+        
+        .quick-link i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+                /* Hero Section */
+        .conduct-hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+            background: linear-gradient(rgba(106, 13, 173, 0.7), rgba(74, 0, 130, 0.8)), 
+                        url('https://images.unsplash.com/photo-1582719471384-894e7e5ab9d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+        }
+
+        .conduct-hero-content {
+            max-width: 800px;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .conduct-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .conduct-hero h1 span {
+            color: var(--accent);
+        }
+
+        .conduct-hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Conduct Section */
+        .conduct-section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 25%;
+            border-radius: 2px;
+        }
+
+        /* Conduct Cards */
+        .conduct-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .conduct-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            border-left: 5px solid var(--accent);
+        }
+
+        .conduct-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .conduct-card h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .conduct-card h3 i {
+            margin-right: 15px;
+            color: var(--accent);
+        }
+
+        .conduct-card ul {
+            list-style: none;
+        }
+
+        .conduct-card li {
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .conduct-card li::before {
+            content: '•';
+            position: absolute;
+            left: 10px;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Baba's Quote */
+        .baba-quote {
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .baba-quote::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.2);
+            font-family: serif;
+        }
+
+        .baba-quote p {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .baba-quote .author {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Rules Table */
+        .rules-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 60px;
+        }
+
+        .rules-table th, .rules-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .rules-table th {
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            color: white;
+            font-weight: 500;
+        }
+
+        .rules-table tr:nth-child(even) {
+            background-color: rgba(106, 13, 173, 0.03);
+        }
+
+        .rules-table tr:hover {
+            background-color: rgba(106, 13, 173, 0.05);
+        }
+
+        /* CTA Section */
+        .conduct-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--purple-dark) 100%);
+            padding: 60px 5%;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        .conduct-cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .conduct-cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .cta-btn.outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn.outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+  /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, white, #e6e6e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo span {
+            background: linear-gradient(135deg, var(--accent), #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-links li {
+            margin: 0;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .social-icons a:hover {
+            background: var(--purple-light);
+            transform: translateY(-7px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+     <!-- Quick Links Sidebar -->
+    <div class="quick-links-sidebar">
+        <div class="quick-links-toggle">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="quick-links-content">
+            <h3 class="quick-links-title">Quick Links</h3>
+            <ul class="quick-links-list">
+                <li><a href="abouthostel.html" class="quick-link"><i class="fas fa-bullseye"></i> Our Mission</a></li>
+                <li><a href="HOSTEL FACILITIES.html" class="quick-link"><i class="fas fa-wifi"></i> Facilities</a></li>
+                <li><a href="DAILY SCHEDULE.html" class="quick-link"><i class="fas fa-images"></i>Daily Schedule</a></li>
+                <li><a href="HOSTEL CHARGES.html" class="quick-link"><i class="fas fa-trophy"></i> Hostel Charages </a></li>
+                <li><a href="hostel.html" class="quick-link"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="#cta" class="quick-link"><i class="fas fa-arrow-right"></i> Apply Now</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Decorative Background Elements -->
+    <div class="bg-element bg-1"></div>
+    <div class="bg-element bg-2"></div>
+    <div class="bg-element bg-3"></div>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+     <div class="logo">
+         <img src="images/logo.png" alt="Technetworks Logo" style="height: 100px;">
+        <a href="hostel.html" style="text-decoration: none;">
+                <h1>Sri Sathya <span>Sai Higher Secondary School</span></h1>
+            </a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="hostel.html">Home</a></li>
+            <li><a href="abouthostel.html">About</a></li>
+            <li><a href="DAILY SCHEDULE.html">Schedule</a></li>
+            <li><a href="HOSTEL CHARGES.html">Charages</a></li>
+            <li><a href="HOSTEL FACILITIES.html">Facilities</a></li>
+
+            
+        </ul>
+        
+        <a href="#" class="nav-btn"><i class="fas fa-edit"></i> Apply Now</a>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+    
+
+    <!-- Hero Section -->
+    <section class="hero" id="main-content">
+        <div class="hero-content">
+            <h1>Upholding integrity <span>our Code of Conduct </span>  guides us all.</h1>
+            <p>Our Code of Conduct reflects our commitment to uphold integrity, responsibility, fairness, and respect in all our actions.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn primary-btn"><i class="fas fa-download"></i> Download Brochure</a>
+                <a href="#" class="btn secondary-btn"><i class="fas fa-video"></i> Virtual Tour</a>
+            </div>
+        </div>
+
+        <!-- 3D Image Slider -->
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <img src="images/cd1.jpg" alt="School Building">
+                </div>
+                <div class="slide">
+                    <img src="images/cd2.jpg" alt="Students in Classroom">
+                </div>
+                <div class="slide">
+                    <img src="images/cd3.jpg" alt="School Laboratory">
+                </div>
+                <div class="slide">
+                    <img src="images/classroom.jpg" alt="Sports Activities">
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="floating-elem elem-1"></div>
+        <div class="floating-elem elem-2"></div>
+        <div class="floating-elem elem-3"></div>
+
+
+
+    </section>
+
+    <!-- Hero Section -->
+    <section class="conduct-hero">
+        <div class="conduct-hero-content">
+            <h1>Code of <span>Conduct</span></h1>
+            <p>Guidelines for disciplined living and character development in our hostel</p>
+        </div>
+    </section>
+
+    <!-- Conduct Section -->
+    <section class="conduct-section">
+        <div class="section-title">
+            <h2>Hostel Rules & Regulations</h2>
+            <p>Essential guidelines for maintaining discipline and harmony</p>
+        </div>
+        
+        <!-- Baba's Quote -->
+        <div class="baba-quote">
+            <p>Humility is the hallmark of a good student</p>
+            <div class="author">- Sri Sathya Sai Baba</div>
+        </div>
+        
+        <!-- Conduct Cards -->
+        <div class="conduct-cards">
+            <!-- Card 1 -->
+            <div class="conduct-card">
+                <h3><i class="fas fa-hands-praying"></i> Behavior & Respect</h3>
+                <ul>
+                    <li>Practice obedience and reverence to teachers and elders</li>
+                    <li>Maintain mutual courtesy and gentlemanly behavior</li>
+                    <li>Promote peace and harmony among fellow students</li>
+                    <li>Voluntarily maintain silence during assemblies, in dining hall, classrooms, and Mandir</li>
+                    <li>Avoid loud talk and idle chatter in common areas</li>
+                </ul>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="conduct-card">
+                <h3><i class="fas fa-user-tie"></i> Personal Grooming</h3>
+                <ul>
+                    <li>Wear decent and unostentatious dress at all times</li>
+                    <li>Maintain short and well-groomed hairstyle</li>
+                    <li>No moustache, beard, or long sideburns permitted</li>
+                    <li>Maintain high standards of personal cleanliness</li>
+                    <li>Keep living spaces and surroundings clean and tidy</li>
+                </ul>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="conduct-card">
+                <h3><i class="fas fa-clock"></i> Discipline & Punctuality</h3>
+                <ul>
+                    <li>Punctuality is mandatory for all activities</li>
+                    <li>Be on time for all school and hostel sessions</li>
+                    <li>Follow the daily schedule without deviation</li>
+                    <li>Write letters to parents at least once a week</li>
+                    <li>Maintain silence during designated study hours</li>
+                </ul>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="conduct-card">
+                <h3><i class="fas fa-home"></i> Hostel Premises</h3>
+                <ul>
+                    <li>Do not leave hostel without explicit permission from warden</li>
+                    <li>Overnight stays outside hostel are strictly forbidden</li>
+                    <li>Parents may visit only between 10am-1pm on Sundays</li>
+                    <li>No visitors permitted on working days</li>
+                    <li>Follow proper procedures for emergency leave requests</li>
+                </ul>
+            </div>
+            
+            <!-- Card 5 -->
+            <div class="conduct-card">
+                <h3><i class="fas fa-ban"></i> Prohibited Items</h3>
+                <ul>
+                    <li>No personal iron boxes or electrical appliances</li>
+                    <li>No tape recorders, transistors, or electronic devices</li>
+                    <li>No video games or entertainment devices</li>
+                    <li>Avoid keeping ready cash or valuables</li>
+                    <li>Only essential items permitted in rooms</li>
+                </ul>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="conduct-card">
+                <h3><i class="fas fa-file-signature"></i> Leave Policy</h3>
+                <ul>
+                    <li>For essential leave, submit written application to warden</li>
+                    <li>Include requisition letter from parents</li>
+                    <li>Provide permission from school authorities</li>
+                    <li>Medical leave requires doctor's approval</li>
+                    <li>Return to hostel within stipulated time</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Detailed Rules Table -->
+        <div class="section-title">
+            <h2>Detailed Regulations</h2>
+            <p>Specific guidelines for hostel residents</p>
+        </div>
+        
+        <table class="rules-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Regulation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Dress Code</strong></td>
+                    <td>Simple, modest clothing in prescribed school colors</td>
+                </tr>
+                <tr>
+                    <td><strong>Hair Standards</strong></td>
+                    <td>Short, neat haircuts (above collar for boys), no facial hair</td>
+                </tr>
+                <tr>
+                    <td><strong>Silence Periods</strong></td>
+                    <td>Mandatory during prayers, meals, study hours and after lights out</td>
+                </tr>
+                <tr>
+                    <td><strong>Visiting Hours</strong></td>
+                    <td>Sundays only (10am-1pm), parents/guardians only</td>
+                </tr>
+                <tr>
+                    <td><strong>Leave Requirements</strong></td>
+                    <td>Parent letter + school permission + warden approval</td>
+                </tr>
+                <tr>
+                    <td><strong>Prohibited Items</strong></td>
+                    <td>Electronics, valuables, cash over ₹500, personal appliances</td>
+                </tr>
+                <tr>
+                    <td><strong>Cleanliness</strong></td>
+                    <td>Daily room inspection, weekly deep cleaning schedule</td>
+                </tr>
+                <tr>
+                    <td><strong>Communication</strong></td>
+                    <td>Weekly letters home, no personal mobile phones</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- CTA Section -->
+        <div class="conduct-cta">
+            <h2>Commitment to Excellence</h2>
+            <p>By following these guidelines, students develop discipline, character and spiritual growth</p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-btn">Download Full Code</a>
+                <a href="#" class="cta-btn outline">Contact Warden</a>
+            </div>
+        </div>
+    </section>
+
+    
+
+    
+
+  <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-logo">Sri Sathya <span>Sai</span></div>
+            <p>Higher Secondary School - Nurturing Future Leaders with Values</p>
+            
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Academics</a></li>
+                <li><a href="#">Admissions</a></li>
+                <li><a href="#">Campus</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Sri Sathya Sai Higher Secondary School. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+  <script>
+       document.addEventListener('DOMContentLoaded', function() {
+            // Toggle Quick Links Sidebar
+            const toggleButton = document.querySelector('.quick-links-toggle');
+            const sidebar = document.querySelector('.quick-links-sidebar');
+            
+            if (toggleButton && sidebar) {
+                toggleButton.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                });
+            }
+            
+            // Smooth scrolling for quick links
+            document.querySelectorAll('.quick-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Close sidebar after clicking
+                            if (sidebar) {
+                                sidebar.classList.remove('active');
+                            }
+                        }
+                    }
+                });
+            });
+        });
+
+</script>
+
+    
+</body>
+</html>

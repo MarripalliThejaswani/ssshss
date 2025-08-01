@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Sathya Sai Higher Secondary School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #6a0dad;
+            --secondary: #ff6b00;
+            --accent: #ffd700;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --text: #333;
+            --success: #28a745;
+            --info: #17a2b8;
+            --purple-light: #8a2be2;
+            --purple-dark: #4b0082;
+            --gradient-purple: linear-gradient(135deg, #8A2BE2, #6A0DAD);
+            --gradient-orange: linear-gradient(135deg, #ff6b00, #e55a00);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9f3ff 0%, #f0e6ff 100%);
+            color: var(--text);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .bg-element {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.08;
+        }
+
+        .bg-1 {
+            top: 10%;
+            left: 5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--secondary), transparent);
+            border-radius: 50%;
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        .bg-2 {
+            bottom: 15%;
+            right: 8%;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, var(--accent), transparent);
+            transform: rotate(45deg);
+            animation: rotate 25s infinite linear;
+        }
+
+        .bg-3 {
+            top: 40%;
+            left: 20%;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--purple-dark), transparent);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 12s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.08; }
+            50% { transform: scale(1.1); opacity: 0.15; }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            33% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            66% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo span {
+            background: var(--gradient-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(255, 107, 0, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 220px;
+            padding: 1rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--dark);
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(106, 13, 173, 0.08);
+            color: var(--purple-light);
+            transform: translateX(5px);
+        }
+
+        .dropdown-content a i {
+            margin-right: 10px;
+            color: var(--purple-light);
+        }
+
+        .nav-btn {
+            background: var(--gradient-purple);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: var(--gradient-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--purple-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: var(--secondary);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--secondary), #e55a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            line-height: 1.7;
+            max-width: 90%;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            color: white;
+            box-shadow: 0 5px 20px rgba(106, 13, 173, 0.4);
+        }
+
+        .primary-btn:hover {
+            background: linear-gradient(135deg, #7d2dd8, #5a1d9e);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(106, 13, 173, 0.5);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: var(--purple-light);
+            border: 2px solid var(--purple-light);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(106, 13, 173, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(106, 13, 173, 0.2);
+        }
+
+        .slider-container {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 600px;
+            height: 500px;
+            perspective: 1500px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s infinite linear;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            transition: transform 0.5s ease;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide:nth-child(1) {
+            transform: rotateY(0deg) translateZ(400px);
+        }
+
+        .slide:nth-child(2) {
+            transform: rotateY(90deg) translateZ(400px);
+        }
+
+        .slide:nth-child(3) {
+            transform: rotateY(180deg) translateZ(400px);
+        }
+
+        .slide:nth-child(4) {
+            transform: rotateY(270deg) translateZ(400px);
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .floating-elem {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .elem-1 {
+            top: 20%;
+            left: 8%;
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .elem-2 {
+            bottom: 25%;
+            right: 12%;
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 10s ease-in-out infinite 1s;
+        }
+
+        .elem-3 {
+            top: 40%;
+            right: 25%;
+            width: 40px;
+            height: 40px;
+            background: var(--purple-light);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 12s ease-in-out infinite 2s;
+        }
+
+        .school-content-section {
+            padding: 6rem 5%;
+            background: #f9f9f9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: var(--gradient-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+
+      .school-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tabs {
+            display: grid; /* Changed to grid for better layout control */
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted for larger images */
+            gap: 30px; /* Increased gap between grid items */
+            width: 100%;
+            margin-bottom: 30px;
+            justify-content: center; /* Center grid items */
+        }
+        
+        .image-tab { /* New class for image-based tabs */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px; /* Increased padding */
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .image-tab:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            color: var(--primary);
+        }
+
+        .image-tab img {
+            width: 150px; /* Increased image size */
+            height: 150px; /* Increased image size */
+            object-fit: cover; /* Changed to cover for better image display */
+            margin-bottom: 20px; /* Increased margin */
+            border-radius: 10px; /* Slightly rounded corners for images */
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Added shadow to images */
+        }
+
+        .image-tab:hover img {
+            transform: scale(1.05); /* Slightly less aggressive zoom on hover */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .image-tab h3 {
+            font-size: 1.3rem; /* Increased font size */
+            font-weight: 700; /* Made bolder */
+            line-height: 1.4;
+            color: inherit; /* Inherit color from parent (.image-tab) */
+        }
+        
+        
+        .content-area {
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .main-content {
+            flex: 2;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+        
+        .main-content h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .main-content p {
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .main-content ul {
+            margin-left: 30px;
+            margin-bottom: 25px;
+        }
+
+        .main-content li {
+            margin-bottom: 10px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .side-boxes {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .side-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .side-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .side-box img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+
+        .side-box:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, white, #e6e6e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo span {
+            background: var(--gradient-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-links li {
+            margin: 0;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .social-icons a:hover {
+            background: var(--purple-light);
+            transform: translateY(-7px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .slider-container {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 5rem;
+                height: auto;
+            }
+
+            .hero-content {
+                margin-bottom: 3rem;
+                max-width: 100%;
+            }
+
+            .hero p {
+                max-width: 100%;
+            }
+
+            .slider-container {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 100%;
+                max-width: 100%;
+                margin-top: 2rem;
+                height: 400px;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                padding: 1.5rem 0;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.8rem 0;
+                text-align: center;
+                width: 100%;
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                width: 100%;
+                padding: 0;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            .content-area {
+                flex-direction: column;
+            }
+            .side-boxes {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .side-box {
+                flex: 1 1 45%;
+                max-width: 250px;
+            }
+            .tabs {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero-btns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            .school-content-section {
+                padding: 4rem 5%;
+            }
+            .side-box {
+                flex: 1 1 100%;
+            }
+        }
+                /* Main Content Styling */
+        .contact-content {
+            padding: 120px 5% 4rem; /* Top padding to clear the fixed navbar */
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: calc(100vh - 120px); /* Adjust based on footer height */
+        }
+        
+        .contact-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--purple-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .contact-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-section h3 {
+            font-size: 1.8rem;
+            color: var(--purple-light);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.8rem;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .contact-info strong {
+            color: var(--purple-dark);
+        }
+
+        .train-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        .train-table th, .train-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .train-table th {
+            background: var(--purple-light);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .train-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative Background Elements -->
+    <div class="bg-element bg-1"></div>
+    <div class="bg-element bg-2"></div>
+    <div class="bg-element bg-3"></div>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+         <div class="logo">
+             <img src="images/logo.png" alt="Technetworks Logo" style="height: 100px;">
+           <a href="index.html" style="text-decoration: none;"> <h1>Sri Sathya <span>Sai Higher Secondary School</span></h1></a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="school.html">School</a></li>
+            <li><a href="hostel.html">Hostel</a></li>
+            <li class="dropdown">
+                <a href="#">Login <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#" class="login-option" data-type="parent"><i class="fas fa-user-friends"></i> Parent Login</a>
+                    <a href="#" class="login-option" data-type="student"><i class="fas fa-user-graduate"></i> Student Login</a>
+                </div>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        
+        <a href="#" class="nav-btn"><i class="fas fa-edit"></i> Apply Now</a>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="main-content">
+        <div class="hero-content">
+            <h1>Education for <span>Character Building</span> & Excellence</h1>
+            <p>Sri Sathya Sai Higher Secondary School provides value-based education that fosters academic excellence, character development, and spiritual growth in a nurturing environment.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn primary-btn"><i class="fas fa-download"></i> Download Brochure</a>
+                <a href="#" class="btn secondary-btn"><i class="fas fa-video"></i> Virtual Tour</a>
+            </div>
+        </div>
+
+        <!-- 3D Image Slider -->
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <img src="https://images.adsttc.com/media/images/63f3/74f7/2b86/6c1a/3302/e888/newsletter/major-lessons-of-contemporary-school-design_1.jpg?1676899581=" alt="School Building">
+                </div>
+                <div class="slide">
+                    <img src="https://www.nichiha.com/uploads/blog/school-design-plays-role-in-academic-success/Nichiha-Commercial-Illumination-IndustrialBlock-ConcreteSeries-Gray-Blue-Yellow-Horizontal.jpg?t=1642175016" alt="Students in Classroom">
+                </div>
+                <div class="slide">
+                    <img src="https://c8.alamy.com/comp/E7FF5B/unoccupied-modern-school-classroom-with-desks-in-a-circle-E7FF5B.jpg" alt="School Laboratory">
+                </div>
+                <div class="slide">
+                    <img src="https://hmcarchitects.com/wp-content/uploads/R161244_00_N6_hmchigh-2.jpg" alt="Sports Activities">
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="floating-elem elem-1"></div>
+        <div class="floating-elem elem-2"></div>
+        <div class="floating-elem elem-3"></div>
+    </section>
+ <div class="contact-content">
+        <h2>Contact Us</h2>
+        <div class="contact-section">
+            <h3>Primary School</h3>
+            <p>For any enquiries regarding the admission process for Class I children or any other information from the primary wing of the School or Junior Hostel, please use the contact information given below:</p>
+            <p><strong>Primary Wing</strong><br>
+            Vice-Principal<br>
+            Sri Sathya Sai Higher Secondary School<br>
+            P.O. Prasanthinilayam<br>
+            Dt. Anantapur, A.P. 515134</p>
+        </div>
+        <div class="contact-section">
+            <h3>Higher Secondary School and Hostel</h3>
+            <p>For any enquiries regarding the admission process for Class XI students or any other information from the Higher Secondary section of the School or Higher Secondary School Boys' Hostel, please use the following contact information:</p>
+            <p><strong>Higher Secondary School</strong><br>
+            Principal<br>
+            Sri Sathya Sai Higher Secondary School<br>
+            P.O. Prasanthi Nilayam<br>
+            Dt. Anantapur, A.P. - 515134<br>
+            Phone: 08555 - 289289<br>
+            Email: <a href="mailto:ssshss@gmail.com">ssshss@gmail.com</a></p>
+            <p><strong>Higher Secondary Boy's Hostel</strong><br>
+            Warden<br>
+            Sri Sathya Sai Hostel for School Boys<br>
+            P.O. Prasanthi Nilayam<br>
+            Dt. Anantapur, A.P. - 515134</p>
+        </div>
+        <div class="contact-section">
+            <h3>How to reach Prashanthi Nilayam</h3>
+            <p>The school is located in the Vidyagiri Complex of Prashanthi Nilayam of Andhra Pradesh state (see Location). To reach Prashanthi Nilayam by bus from neighbouring states of Andhra Pradesh is easy and trouble-free as there are direct buses from several major towns of Andhra Pradesh, Tamil Nadu and Karnataka. There are also a number of trains that pass through the 'Sri Sathya Sai Prasanthi Nilayam' railway station which is located at about 8 kms from the Prashanthi Nilayam township. Given below is a list of trains:</p>
+            <table class="train-table">
+                <thead>
+                    <tr>
+                        <th>Train Name</th>
+                        <th>Train Service</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Rajdhani Express</td>
+                        <td>Bangalore/Nizamuddin (New Delhi)</td>
+                    </tr>
+                    <tr>
+                        <td>Karnataka Express</td>
+                        <td>Bangalore/New Delhi</td>
+                    </tr>
+                    <tr>
+                        <td>Prasanthi Express</td>
+                        <td>Bangalore/Bhubaneswar</td>
+                    </tr>
+                    <tr>
+                        <td>Kachiguda Express</td>
+                        <td>Bangalore/Secunderabad</td>
+                    </tr>
+                    <tr>
+                        <td>Udyan Express</td>
+                        <td>Bangalore/Mumbai</td>
+                    </tr>
+                    <tr>
+                        <td>Passenger</td>
+                        <td>Guntur -Yeshwantapur</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-logo">Sri Sathya <span>Sai</span></div>
+            <p>Higher Secondary School - Nurturing Future Leaders with Values</p>
+            
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Academics</a></li>
+                <li><a href="#">Admissions</a></li>
+                <li><a href="#">Campus</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Sri Sathya Sai Higher Secondary School. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close mobile menu after clicking
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Set active class for current page in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Animation on scroll for content
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 1s ease-out forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.image-tab, .main-content, .side-box').forEach(item => {
+                item.style.opacity = '0';
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

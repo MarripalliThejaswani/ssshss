@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Sathya Sai Higher Secondary School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #6a0dad;
+            --secondary: #ff6b00;
+            --accent: #ffd700;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --text: #333;
+            --success: #28a745;
+            --info: #17a2b8;
+            --purple-light: #8a2be2;
+            --purple-dark: #4b0082;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9f3ff 0%, #f0e6ff 100%);
+            color: var(--text);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Decorative background elements */
+        .bg-element {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.08;
+        }
+
+        .bg-1 {
+            top: 10%;
+            left: 5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--purple-light), transparent);
+            border-radius: 50%;
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        .bg-2 {
+            bottom: 15%;
+            right: 8%;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, var(--accent), transparent);
+            transform: rotate(45deg);
+            animation: rotate 25s infinite linear;
+        }
+
+        .bg-3 {
+            top: 40%;
+            left: 20%;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--purple-dark), transparent);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 12s infinite ease-in-out;
+        }
+
+        /* Keyframes */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.08; }
+            50% { transform: scale(1.1); opacity: 0.15; }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            33% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            66% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo span {
+            color: var(--secondary);
+            text-shadow: 0 2px 4px rgba(255, 107, 0, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Login Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 220px;
+            padding: 1rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--dark);
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(106, 13, 173, 0.08);
+            color: var(--purple-light);
+            transform: translateX(5px);
+        }
+
+        .dropdown-content a i {
+            margin-right: 10px;
+            color: var(--purple-light);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, var(--secondary), #e55a00);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--purple-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: var(--secondary);
+        }
+ /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--secondary), #e55a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            line-height: 1.7;
+            max-width: 90%;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1.1rem 2.2rem;
+            border-radius: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
+            color: white;
+            box-shadow: 0 5px 20px rgba(106, 13, 173, 0.4);
+        }
+
+        .primary-btn:hover {
+            background: linear-gradient(135deg, #7d2dd8, #5a1d9e);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(106, 13, 173, 0.5);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: var(--purple-light);
+            border: 2px solid var(--purple-light);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(106, 13, 173, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(106, 13, 173, 0.2);
+        }
+
+        /* 3D Slider */
+        .slider-container {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 600px;
+            height: 500px;
+            perspective: 1500px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s infinite linear;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            transition: transform 0.5s ease;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide:nth-child(1) {
+            transform: rotateY(0deg) translateZ(400px);
+        }
+
+        .slide:nth-child(2) {
+            transform: rotateY(90deg) translateZ(400px);
+        }
+
+        .slide:nth-child(3) {
+            transform: rotateY(180deg) translateZ(400px);
+        }
+
+        .slide:nth-child(4) {
+            transform: rotateY(270deg) translateZ(400px);
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .elem-1 {
+            top: 20%;
+            left: 8%;
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .elem-2 {
+            bottom: 25%;
+            right: 12%;
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 10s ease-in-out infinite 1s;
+        }
+
+        .elem-3 {
+            top: 40%;
+            right: 25%;
+            width: 40px;
+            height: 40px;
+            background: var(--purple-light);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 12s ease-in-out infinite 2s;
+        }
+         /* Quick Links Sidebar */
+        .quick-links-sidebar {
+            position: fixed;
+            right: -250px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 250px;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            border-radius: 10px 0 0 10px;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .quick-links-sidebar.active {
+            right: 0;
+        }
+        
+        .quick-links-toggle {
+            position: absolute;
+            left: -40px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px 0 0 10px;
+            cursor: pointer;
+            box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .quick-links-toggle i {
+            transition: var(--transition);
+        }
+        
+        .quick-links-sidebar.active .quick-links-toggle i {
+            transform: rotate(180deg);
+        }
+        
+        .quick-links-content {
+            padding: 20px;
+        }
+        
+        .quick-links-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .quick-links-list {
+            list-style: none;
+        }
+        
+        .quick-links-list li {
+            margin-bottom: 10px;
+        }
+        
+        .quick-link {
+            display: block;
+            padding: 8px 12px;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-link::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+            transition: var(--transition);
+        }
+        
+        .quick-link:hover {
+            background: var(--light);
+            transform: translateX(-5px);
+            color: var(--accent);
+        }
+        
+        .quick-link:hover::before {
+            left: 100%;
+        }
+        
+        .quick-link i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+           /* Hero Section for Hostel */
+        .hostel-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+            background: linear-gradient(rgba(106, 13, 173, 0.7), rgba(74, 0, 130, 0.8)), 
+                        url('https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+        }
+
+        .hostel-hero-content {
+            max-width: 800px;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hostel-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .hostel-hero h1 span {
+            color: var(--accent);
+        }
+
+        .hostel-hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hostel Facilities Section */
+        .hostel-section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 25%;
+            border-radius: 2px;
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .facility-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .facility-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .facility-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .facility-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .facility-card:hover .facility-img img {
+            transform: scale(1.1);
+        }
+
+        .facility-content {
+            padding: 25px;
+        }
+
+        .facility-content h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .facility-card:hover .facility-content h3 {
+            color: var(--purple-light);
+        }
+
+        .facility-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .facility-features {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .facility-features li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .facility-features i {
+            color: var(--accent);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .facility-note {
+            font-style: italic;
+            color: var(--purple-dark);
+            margin-top: 15px;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            background-color: rgba(106, 13, 173, 0.05);
+            border-left: 3px solid var(--accent);
+        }
+
+        /* Medical Facilities Special Section */
+        .medical-highlights {
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.05) 0%, rgba(255, 215, 0, 0.05) 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+
+        .medical-text {
+            padding: 20px;
+        }
+
+        .medical-text h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .medical-features {
+            list-style: none;
+        }
+
+        .medical-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .medical-features i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .medical-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .medical-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Hostel Mess Special Section */
+        .mess-section {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .mess-image {
+            height: 100%;
+            min-height: 300px;
+        }
+
+        .mess-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mess-content {
+            padding: 40px;
+        }
+
+        .mess-content h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .menu-sample {
+            background: rgba(106, 13, 173, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .menu-sample h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-sample h4 i {
+            margin-right: 10px;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .menu-item i {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        /* Multi-purpose Hall Section */
+        .hall-section {
+            margin-top: 60px;
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.03) 0%, rgba(74, 0, 130, 0.03) 100%);
+            padding: 60px 5%;
+            border-radius: 15px;
+        }
+
+        .hall-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hall-features {
+            list-style: none;
+        }
+
+        .hall-features li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .hall-features i {
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: var(--accent);
+        }
+
+        .hall-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .hall-gallery img {
+            width: 100%;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .hall-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+  /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, white, #e6e6e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo span {
+            background: linear-gradient(135deg, var(--accent), #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-links li {
+            margin: 0;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .social-icons a:hover {
+            background: var(--purple-light);
+            transform: translateY(-7px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }</style>
+</head>
+<body>
+     <!-- Quick Links Sidebar -->
+    <div class="quick-links-sidebar">
+        <div class="quick-links-toggle">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="quick-links-content">
+            <h3 class="quick-links-title">Quick Links</h3>
+            <ul class="quick-links-list">
+                <li><a href="#mission" class="quick-link"><i class="fas fa-bullseye"></i> Our Mission</a></li>
+                <li><a href="#facilities" class="quick-link"><i class="fas fa-wifi"></i> Facilities</a></li>
+                <li><a href="#gallery" class="quick-link"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="#awards" class="quick-link"><i class="fas fa-trophy"></i> Awards</a></li>
+                <li><a href="#community" class="quick-link"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="#cta" class="quick-link"><i class="fas fa-arrow-right"></i> Apply Now</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Decorative Background Elements -->
+    <div class="bg-element bg-1"></div>
+    <div class="bg-element bg-2"></div>
+    <div class="bg-element bg-3"></div>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <div class="logo">
+             <img src="images/logo.png" alt="Technetworks Logo" style="height: 100px;">
+        <a href="hostel.html" style="text-decoration: none;">
+                <h1>Sri Sathya <span>Sai Higher Secondary School</span></h1>
+            </a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><li><a href="hostel.html">Home</a></li>
+            <li><a href="abouthostel.html">About</a></li>
+            <li><a href="CODE OF CONDUCT.html">code</a></li>
+            <li><a href="DAILY SCHEDULE.html">Schedule</a></li>
+            <li><a href="HOSTEL CHARGES.html">charges</a></li>
+        </ul>
+        </ul>
+        
+        <a href="#" class="nav-btn"><i class="fas fa-edit"></i> Apply Now</a>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+    
+
+    <!-- Hero Section -->
+    <section class="hero" id="main-content">
+        <div class="hero-content">
+            <h1>"Safe and supportive  <span>hostel for focused </span> student living."</h1>
+            <p>Sri Sathya Sai Higher Secondary School provides value-based education that fosters academic excellence, character development, and spiritual growth in a nurturing environment.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn primary-btn"><i class="fas fa-download"></i> Download Brochure</a>
+                <a href="#" class="btn secondary-btn"><i class="fas fa-video"></i> Virtual Tour</a>
+            </div>
+        </div>
+
+        <!-- 3D Image Slider -->
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <img src="images/school1.jpg" alt="School Building">
+                </div>
+                <div class="slide">
+                    <img src="images/gym.jpg" alt="Students in Classroom">
+                </div>
+                <div class="slide">
+                    <img src="images/hc1.jpg" alt="School Laboratory">
+                </div>
+                <div class="slide">
+                    <img src="images/cd2.jpg" alt="Sports Activities">
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="floating-elem elem-1"></div>
+        <div class="floating-elem elem-2"></div>
+        <div class="floating-elem elem-3"></div>
+    </section>
+
+
+
+
+
+
+
+
+     <!-- Hero Section -->
+    <section class="hostel-hero">
+        <div class="hostel-hero-content">
+            <h1>Our <span>Hostel</span> Facilities</h1>
+            <p>A home away from home with world-class amenities and a nurturing environment for holistic development</p>
+        </div>
+    </section>
+
+    <!-- Hostel Facilities Section -->
+    <section class="hostel-section">
+        <div class="section-title">
+            <h2>Hostel Amenities</h2>
+            <p>We provide exceptional facilities to ensure our students have a comfortable and productive stay</p>
+        </div>
+        
+        <div class="facilities-grid">
+            <!-- Medical Facilities -->
+            <div class="facility-card">
+                <div class="facility-img">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Medical Facility">
+                </div>
+                <div class="facility-content">
+                    <h3>Medical Facilities</h3>
+                    <p>Comprehensive healthcare support for all hostel residents</p>
+                    <ul class="facility-features">
+                        <li><i class="fas fa-check"></i> 24/7 medical center with trained nurse</li>
+                        <li><i class="fas fa-check"></i> Doctor on call and weekly visits</li>
+                        <li><i class="fas fa-check"></i> First aid and emergency care</li>
+                        <li><i class="fas fa-check"></i> Regular health check-ups</li>
+                        <li><i class="fas fa-check"></i> Tie-ups with nearby hospitals</li>
+                        <li><i class="fas fa-check"></i> Health awareness programs</li>
+                        <li><i class="fas fa-check"></i> Isolation room for contagious illnesses</li>
+                    </ul>
+                    <p class="facility-note">Parents receive immediate notification for any serious health concerns.</p>
+                </div>
+            </div>
+
+            <!-- Hostel Mess -->
+            <div class="facility-card">
+                <div class="facility-img">
+                    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Hostel Mess">
+                </div>
+                <div class="facility-content">
+                    <h3>Hostel Mess & Dining</h3>
+                    <p>Nutritious and hygienic vegetarian meals in a clean environment</p>
+                    <ul class="facility-features">
+                        <li><i class="fas fa-check"></i> Modern, well-equipped kitchen</li>
+                        <li><i class="fas fa-check"></i> 3 balanced meals + evening snacks daily</li>
+                        <li><i class="fas fa-check"></i> Special diet options available</li>
+                        <li><i class="fas fa-check"></i> Monthly menu planned by nutritionist</li>
+                        <li><i class="fas fa-check"></i> RO purified drinking water</li>
+                        <li><i class="fas fa-check"></i> Spacious dining hall with AC</li>
+                        <li><i class="fas fa-check"></i> Regular hygiene inspections</li>
+                    </ul>
+                    <p class="facility-note">Nutritionist-designed menus ensure balanced meals meeting adolescent dietary needs.</p>
+                </div>
+            </div>
+
+            <!-- Multi-purpose Hall -->
+            <div class="facility-card">
+                <div class="facility-img">
+                    <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Multi-purpose Hall">
+                </div>
+                <div class="facility-content">
+                    <h3>Multi-purpose Hall</h3>
+                    <p>Versatile space for events, gatherings, and cultural activities</p>
+                    <ul class="facility-features">
+                        <li><i class="fas fa-check"></i> 200-seat capacity auditorium</li>
+                        <li><i class="fas fa-check"></i> Advanced audio-visual equipment</li>
+                        <li><i class="fas fa-check"></i> Stage for performances</li>
+                        <li><i class="fas fa-check"></i> Central AC with proper ventilation</li>
+                        <li><i class="fas fa-check"></i> Flexible seating arrangements</li>
+                        <li><i class="fas fa-check"></i> Used for assemblies, workshops, celebrations</li>
+                        <li><i class="fas fa-check"></i> Available for student events</li>
+                    </ul>
+                    <p class="facility-note">The hall transforms into examination center during annual tests.</p>
+                </div>
+            </div>
+
+            <!-- Study & Learning Spaces -->
+            <div class="facility-card">
+                <div class="facility-img">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Study Room">
+                </div>
+                <div class="facility-content">
+                    <h3>Study & Learning Spaces</h3>
+                    <p>Dedicated areas for academic work with all necessary resources</p>
+                    <ul class="facility-features">
+                        <li><i class="fas fa-check"></i> 24/7 access to study rooms</li>
+                        <li><i class="fas fa-check"></i> High-speed WiFi throughout</li>
+                        <li><i class="fas fa-check"></i> Quiet zones for focused study</li>
+                        <li><i class="fas fa-check"></i> Reference library with 5000+ books</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Health & Wellness -->
+            <div class="facility-card">
+                <div class="facility-img">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Fitness Center">
+                </div>
+                <div class="facility-content">
+                    <h3>Health & Wellness</h3>
+                    <p>Facilities to maintain physical and mental wellbeing</p>
+                    <ul class="facility-features">
+                        <li><i class="fas fa-check"></i> Fully-equipped gymnasium</li>
+                        <li><i class="fas fa-check"></i> Yoga and meditation hall</li>
+                        <li><i class="fas fa-check"></i> On-campus medical center</li>
+                        <li><i class="fas fa-check"></i> Counseling services</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Recreation & Social -->
+            <div class="facility-card">
+                <div class="facility-img">
+                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Common Room">
+                </div>
+                <div class="facility-content">
+                    <h3>Recreation & Social</h3>
+                    <p>Spaces for relaxation and building community</p>
+                    <ul class="facility-features">
+                        <li><i class="fas fa-check"></i> Common rooms with TV</li>
+                        <li><i class="fas fa-check"></i> Indoor games facilities</li>
+                        <li><i class="fas fa-check"></i> Outdoor sports courts</li>
+                        <li><i class="fas fa-check"></i> Student activity center</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical Facilities Expanded Section -->
+        <div class="medical-highlights">
+            <div class="medical-text">
+                <h3>Comprehensive Healthcare Support</h3>
+                <ul class="medical-features">
+                    <li>
+                        <i class="fas fa-user-md"></i>
+                        <div>
+                            <strong>Qualified Medical Staff</strong>
+                            <p>Full-time nurse and visiting doctor (3 times/week) with emergency on-call availability</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-heartbeat"></i>
+                        <div>
+                            <strong>Preventive Healthcare</strong>
+                            <p>Annual health check-ups including BMI, vision, dental screening, and vaccination drives</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <strong>Emergency Response</strong>
+                            <p>Ambulance on standby and tie-ups with nearby hospitals for specialized care</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-brain"></i>
+                        <div>
+                            <strong>Mental Wellness</strong>
+                            <p>Counseling services, stress management workshops, and meditation programs</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="medical-image">
+                <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Medical Staff">
+            </div>
+        </div>
+
+        <!-- Hostel Mess Expanded Section -->
+        <div class="mess-section">
+            <div class="mess-content">
+                <h3>Nutritious Dining Experience</h3>
+                <p>Our hostel mess follows strict hygiene standards while providing delicious, balanced vegetarian meals prepared under the guidance of a certified nutritionist.</p>
+                
+                <div class="menu-sample">
+                    <h4><i class="fas fa-utensils"></i> Sample Daily Menu</h4>
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <i class="fas fa-bread-slice"></i>
+                            <div>Breakfast</div>
+                        </div>
+                        <div class="menu-item">
+                            <i class="fas fa-apple-alt"></i>
+                            <div>Lunch</div>
+                        </div>
+                        <div class="menu-item">
+                            <i class="fas fa-mug-hot"></i>
+                            <div>Evening</div>
+                        </div>
+                        <div class="menu-item">
+                            <i class="fas fa-drumstick-bite"></i>
+                            <div>Dinner</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <ul class="facility-features" style="margin-top: 20px;">
+                    <li><i class="fas fa-check"></i> <strong>Special Diets:</strong> Jain, diabetic-friendly, and allergy-sensitive options available</li>
+                    <li><i class="fas fa-check"></i> <strong>Quality Assurance:</strong> ISO-certified kitchen with HACCP protocols</li>
+                    <li><i class="fas fa-check"></i> <strong>Student Feedback:</strong> Monthly menu review meetings with student representatives</li>
+                </ul>
+            </div>
+            <div class="mess-image">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Dining Hall">
+            </div>
+        </div>
+
+        <!-- Multi-purpose Hall Expanded Section -->
+        <div class="hall-section">
+            <div class="section-title" style="margin-bottom: 40px;">
+                <h2>Multi-purpose Hall</h2>
+                <p>The cultural and academic hub of our hostel community</p>
+            </div>
+            
+            <div class="hall-container">
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.8rem;">Features & Usage</h3>
+                    <ul class="hall-features">
+                        <li>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <strong>Academic Events:</strong> Guest lectures, seminars, and workshops
+                        </li>
+                        <li>
+                            <i class="fas fa-theater-masks"></i>
+                            <strong>Cultural Programs:</strong> Annual day, talent shows, and festival celebrations
+                        </li>
+                        <li>
+                            <i class="fas fa-film"></i>
+                            <strong>Recreational Activities:</strong> Movie screenings and gaming competitions
+                        </li>
+                        <li>
+                            <i class="fas fa-pray"></i>
+                            <strong>Spiritual Gatherings:</strong> Bhajans, meditation sessions, and value education classes
+                        </li>
+                        <li>
+                            <i class="fas fa-microphone"></i>
+                            <strong>Technical Specifications:</strong> Professional sound system, HD projector, and stage lighting
+                        </li>
+                    </ul>
+                </div>
+                <div class="hall-gallery">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Hall Event">
+                    <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Hall Setup">
+                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1412&q=80" alt="Hall Performance">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Hall Lecture">
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+  <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-logo">Sri Sathya <span>Sai</span></div>
+            <p>Higher Secondary School - Nurturing Future Leaders with Values</p>
+            
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Academics</a></li>
+                <li><a href="#">Admissions</a></li>
+                <li><a href="#">Campus</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Sri Sathya Sai Higher Secondary School. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+  <div id="schoolPopup" class="popup-overlay">
+    <div class="popup-content">
+      <button class="close-button">&times;</button>
+      <img src="popup3.png" alt="Sri Satya Sai Girl Student" class="popup-image" />
+      <!-- You can add heading or slogan below the image if you want -->
+    </div>
+  </div>
+  <script>
+    // Toggle Quick Links Sidebar
+        document.querySelector('.quick-links-toggle').addEventListener('click', function() {
+            document.querySelector('.quick-links-sidebar').classList.toggle('active');
+        });
+        
+        // Smooth scrolling for quick links
+        document.querySelectorAll('.quick-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close sidebar after clicking (optional)
+                    document.querySelector('.quick-links-sidebar').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
